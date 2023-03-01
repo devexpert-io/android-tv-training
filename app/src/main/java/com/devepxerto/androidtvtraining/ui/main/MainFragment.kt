@@ -28,6 +28,8 @@ class MainFragment : BrowseSupportFragment() {
             )
         )
     }
+    private val backgroundState = BackgroundState(this)
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,12 +39,16 @@ class MainFragment : BrowseSupportFragment() {
         adapter = rowsAdapter
 
         onItemViewClickedListener =
-            OnItemViewClickedListener { _, movie: Any?, _, _ ->
+            OnItemViewClickedListener { _, movie, _, _ ->
                 val intent = Intent(requireContext(), DetailActivity::class.java).apply {
                     putExtra(DetailActivity.MOVIE_EXTRA, movie as Movie)
                 }
                 startActivity(intent)
             }
+
+        onItemViewSelectedListener = OnItemViewSelectedListener { _, movie, _, _ ->
+            (movie as? Movie)?.let { backgroundState.loadUrl(movie.backdrop) }
+        }
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
