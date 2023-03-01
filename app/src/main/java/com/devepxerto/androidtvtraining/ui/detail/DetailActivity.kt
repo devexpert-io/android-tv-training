@@ -7,6 +7,7 @@ import com.devepxerto.androidtvtraining.R
 class DetailActivity : FragmentActivity() {
     companion object {
         const val MOVIE_EXTRA = "extra:movie"
+        const val HERO_EXTRA = "extra:hero"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

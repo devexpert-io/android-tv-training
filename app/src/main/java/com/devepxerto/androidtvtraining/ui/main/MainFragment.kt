@@ -3,6 +3,7 @@ package com.devepxerto.androidtvtraining.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.viewModels
 import androidx.leanback.app.BrowseSupportFragment
 import androidx.leanback.widget.*
@@ -39,11 +40,17 @@ class MainFragment : BrowseSupportFragment() {
         adapter = rowsAdapter
 
         onItemViewClickedListener =
-            OnItemViewClickedListener { _, movie, _, _ ->
+            OnItemViewClickedListener { vh, movie, _, _ ->
+                val bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    requireActivity(),
+                    (vh.view as ImageCardView).mainImageView,
+                    DetailActivity.HERO_EXTRA
+                ).toBundle()
+
                 val intent = Intent(requireContext(), DetailActivity::class.java).apply {
                     putExtra(DetailActivity.MOVIE_EXTRA, movie as Movie)
                 }
-                startActivity(intent)
+                startActivity(intent, bundle)
             }
 
         onItemViewSelectedListener = OnItemViewSelectedListener { _, movie, _, _ ->
