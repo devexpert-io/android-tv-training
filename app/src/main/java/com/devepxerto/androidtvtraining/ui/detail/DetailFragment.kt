@@ -10,11 +10,14 @@ import androidx.leanback.widget.FullWidthDetailsOverviewRowPresenter
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.devepxerto.androidtvtraining.common.loadImageUrl
 import com.devepxerto.androidtvtraining.common.parcelable
 import com.devepxerto.androidtvtraining.ui.detail.DetailActivity.Companion.MOVIE_EXTRA
 import kotlinx.coroutines.launch
 
 class DetailFragment : DetailsSupportFragment() {
+
+    private val detailsBackgroundState = DetailsBackgroundState(this)
 
     private val vm by viewModels<DetailViewModel> {
         DetailViewModelFactory(requireActivity().intent.parcelable(MOVIE_EXTRA)!!)
@@ -29,8 +32,12 @@ class DetailFragment : DetailsSupportFragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
-                vm.state.collect { state ->
-                    rowsAdapter.add(0, DetailsOverviewRow(state.movie))
+                vm.state.collect { (movie) ->
+                    val row = DetailsOverviewRow(movie)
+                    row.loadImageUrl(requireContext(), movie.poster)
+                    rowsAdapter.add(0, row)
+
+                    detailsBackgroundState.loadUrl(movie.backdrop)
                 }
             }
         }
