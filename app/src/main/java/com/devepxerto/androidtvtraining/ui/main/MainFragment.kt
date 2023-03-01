@@ -11,6 +11,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.devepxerto.androidtvtraining.R
 import com.devepxerto.androidtvtraining.data.MoviesRepository
 import com.devepxerto.androidtvtraining.data.remote.RemoteConnection
+import com.devepxerto.androidtvtraining.domain.Category
 import com.devepxerto.androidtvtraining.domain.Movie
 import kotlinx.coroutines.launch
 
@@ -36,7 +37,7 @@ class MainFragment : BrowseSupportFragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
                 vm.state.collect { state ->
-                    update(state.movies)
+                    update(state.categories)
                 }
             }
         }
@@ -44,17 +45,16 @@ class MainFragment : BrowseSupportFragment() {
         vm.onUiReady()
     }
 
-    private fun update(movies: List<Movie>) {
+    private fun update(categories: Map<Category, List<Movie>>) {
         val cardPresenter = CardPresenter()
 
-        (1..5).forEach { categoryId ->
-            val categoryTitle = "Category $categoryId"
+        categories.forEach { (category, movies) ->
 
             val listRowAdapter = ArrayObjectAdapter(cardPresenter).apply {
                 addAll(0, movies)
             }
 
-            val header = HeaderItem(categoryId.toLong(), categoryTitle)
+            val header = HeaderItem(category.ordinal.toLong(), category.name)
             rowsAdapter.add(ListRow(header, listRowAdapter))
         }
     }
