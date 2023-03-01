@@ -4,6 +4,7 @@ import android.view.ViewGroup
 import androidx.leanback.widget.ImageCardView
 import androidx.leanback.widget.Presenter
 import com.devepxerto.androidtvtraining.common.loadUrl
+import com.devepxerto.androidtvtraining.domain.Movie
 
 class CardPresenter : Presenter() {
 
@@ -19,7 +20,7 @@ class CardPresenter : Presenter() {
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, item: Any) {
-        val movie = item as MainFragment.Movie
+        val movie = item as Movie
         with(viewHolder.view as ImageCardView) {
             titleText = movie.title
             contentText = movie.year.toString()
