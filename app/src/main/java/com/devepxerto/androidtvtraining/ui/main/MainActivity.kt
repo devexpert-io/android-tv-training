@@ -1,7 +1,8 @@
-package com.devepxerto.androidtvtraining
+package com.devepxerto.androidtvtraining.ui.main
 
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
+import com.devepxerto.androidtvtraining.R
 
 class MainActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
