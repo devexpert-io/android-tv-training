@@ -1,5 +1,6 @@
 package com.devepxerto.androidtvtraining.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -13,6 +14,7 @@ import com.devepxerto.androidtvtraining.data.MoviesRepository
 import com.devepxerto.androidtvtraining.data.remote.RemoteConnection
 import com.devepxerto.androidtvtraining.domain.Category
 import com.devepxerto.androidtvtraining.domain.Movie
+import com.devepxerto.androidtvtraining.ui.detail.DetailActivity
 import kotlinx.coroutines.launch
 
 class MainFragment : BrowseSupportFragment() {
@@ -33,6 +35,14 @@ class MainFragment : BrowseSupportFragment() {
         title = getString(R.string.browse_title)
         rowsAdapter = ArrayObjectAdapter(ListRowPresenter())
         adapter = rowsAdapter
+
+        onItemViewClickedListener =
+            OnItemViewClickedListener { _, movie: Any?, _, _ ->
+                val intent = Intent(requireContext(), DetailActivity::class.java).apply {
+                    putExtra(DetailActivity.MOVIE_EXTRA, movie as Movie)
+                }
+                startActivity(intent)
+            }
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
