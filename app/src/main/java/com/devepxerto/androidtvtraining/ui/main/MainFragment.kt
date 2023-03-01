@@ -9,13 +9,22 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.devepxerto.androidtvtraining.R
+import com.devepxerto.androidtvtraining.data.MoviesRepository
+import com.devepxerto.androidtvtraining.data.remote.RemoteConnection
 import com.devepxerto.androidtvtraining.domain.Movie
 import kotlinx.coroutines.launch
 
 class MainFragment : BrowseSupportFragment() {
 
     private lateinit var rowsAdapter: ArrayObjectAdapter
-    private val vm by viewModels<MainViewModel>()
+    private val vm by viewModels<MainViewModel> {
+        MainViewModelFactory(
+            MoviesRepository(
+                RemoteConnection.service,
+                requireContext().getString(R.string.api_key)
+            )
+        )
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

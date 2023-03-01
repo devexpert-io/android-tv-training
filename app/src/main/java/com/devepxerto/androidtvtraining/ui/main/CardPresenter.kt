@@ -23,7 +23,7 @@ class CardPresenter : Presenter() {
         val movie = item as Movie
         with(viewHolder.view as ImageCardView) {
             titleText = movie.title
-            contentText = movie.year.toString()
+            contentText = movie.releaseDate
             mainImageView.loadUrl(movie.poster)
         }
 
