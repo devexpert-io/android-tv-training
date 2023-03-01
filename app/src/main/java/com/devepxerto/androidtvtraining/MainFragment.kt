@@ -1,21 +1,14 @@
 package com.devepxerto.androidtvtraining
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
+import androidx.leanback.app.BrowseSupportFragment
 
-class MainFragment : Fragment() {
+class MainFragment : BrowseSupportFragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return TextView(requireContext()).apply {
-            text = "Hello World!"
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        title = getString(R.string.browse_title)
     }
 }
