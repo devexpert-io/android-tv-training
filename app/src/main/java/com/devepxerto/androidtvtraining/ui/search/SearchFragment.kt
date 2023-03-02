@@ -3,23 +3,24 @@ package com.devepxerto.androidtvtraining.ui.search
 import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.leanback.app.SearchSupportFragment
-import androidx.leanback.widget.*
+import androidx.leanback.widget.ArrayObjectAdapter
+import androidx.leanback.widget.ListRowPresenter
+import androidx.leanback.widget.ObjectAdapter
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.devepxerto.androidtvtraining.R
 import com.devepxerto.androidtvtraining.data.MoviesRepository
 import com.devepxerto.androidtvtraining.data.remote.RemoteConnection
-import com.devepxerto.androidtvtraining.domain.Movie
-import com.devepxerto.androidtvtraining.ui.detail.DetailActivity
-import com.devepxerto.androidtvtraining.ui.main.CardPresenter
+import com.devepxerto.androidtvtraining.ui.common.MovieRowScreen
+import com.devepxerto.androidtvtraining.ui.main.BackgroundState
 import kotlinx.coroutines.launch
 
 class SearchFragment : SearchSupportFragment(),
-    SearchSupportFragment.SearchResultProvider {
+    SearchSupportFragment.SearchResultProvider, MovieRowScreen {
 
-    private val rowsAdapter = ArrayObjectAdapter(ListRowPresenter())
-    private lateinit var listRowAdapter: ArrayObjectAdapter
+    override val rowsAdapter: ArrayObjectAdapter = ArrayObjectAdapter(ListRowPresenter())
+    override val backgroundState = BackgroundState(this)
 
     private val vm: SearchViewModel by viewModels {
         SearchViewModelFactory(
@@ -34,23 +35,13 @@ class SearchFragment : SearchSupportFragment(),
         super.onCreate(savedInstanceState)
         setSearchResultProvider(this)
 
-        listRowAdapter = ArrayObjectAdapter(CardPresenter()).apply {
-            val header = HeaderItem(getString(R.string.search))
-            rowsAdapter.add(ListRow(header, this))
-        }
+        setOnItemViewClickedListener(requireContext().itemViewClickListener())
+        setOnItemViewSelectedListener(requireContext().itemViewSelectedListener())
 
-        setOnItemViewClickedListener { vh, movie, _, _ ->
-            DetailActivity.navigate(
-                requireContext(),
-                movie as Movie,
-                (vh.view as ImageCardView).mainImageView
-            )
-        }
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
                 vm.state.collect { state ->
-                    listRowAdapter.clear()
-                    listRowAdapter.addAll(0, state.searchResult)
+                    submitRows(buildListRow(0, getString(R.string.search), state.searchResult))
                 }
             }
         }
