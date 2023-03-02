@@ -1,11 +1,11 @@
-package com.devepxerto.androidtvtraining.ui.common
+package com.devepxerto.androidtvtraining.ui.screens.common
 
 import android.content.Context
 import androidx.leanback.widget.*
 import com.devepxerto.androidtvtraining.domain.Movie
-import com.devepxerto.androidtvtraining.ui.detail.DetailActivity
-import com.devepxerto.androidtvtraining.ui.main.BackgroundState
-import com.devepxerto.androidtvtraining.ui.main.CardPresenter
+import com.devepxerto.androidtvtraining.ui.screens.detail.DetailActivity
+import com.devepxerto.androidtvtraining.ui.screens.main.BackgroundState
+import com.devepxerto.androidtvtraining.ui.screens.main.CardPresenter
 
 interface MovieRowScreen {
 

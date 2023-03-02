@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidTVTraining">
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name="com.devepxerto.androidtvtraining.ui.screens.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,10 +29,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.detail.DetailActivity"
+            android:name="com.devepxerto.androidtvtraining.ui.screens.detail.DetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.search.SearchActivity"
+            android:name="com.devepxerto.androidtvtraining.ui.screens.search.SearchActivity"
             android:exported="false" />
     </application>
 

@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <androidx.fragment.app.FragmentContainerView
-        android:name="com.devepxerto.androidtvtraining.ui.detail.DetailFragment"
+        android:name="com.devepxerto.androidtvtraining.ui.screens.detail.DetailFragment"
         android:id="@+id/details_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

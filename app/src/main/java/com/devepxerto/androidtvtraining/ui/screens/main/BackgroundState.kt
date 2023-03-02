@@ -1,4 +1,4 @@
-package com.devepxerto.androidtvtraining.ui.main
+package com.devepxerto.androidtvtraining.ui.screens.main
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable

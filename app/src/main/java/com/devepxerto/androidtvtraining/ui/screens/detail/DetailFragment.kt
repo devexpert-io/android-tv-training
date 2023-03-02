@@ -1,4 +1,4 @@
-package com.devepxerto.androidtvtraining.ui.detail
+package com.devepxerto.androidtvtraining.ui.screens.detail
 
 import android.os.Bundle
 import android.view.View
@@ -11,7 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.devepxerto.androidtvtraining.common.loadImageUrl
 import com.devepxerto.androidtvtraining.common.parcelable
-import com.devepxerto.androidtvtraining.ui.detail.DetailActivity.Companion.MOVIE_EXTRA
+import com.devepxerto.androidtvtraining.ui.screens.detail.DetailActivity.Companion.MOVIE_EXTRA
 import kotlinx.coroutines.launch
 
 class DetailFragment : DetailsSupportFragment() {

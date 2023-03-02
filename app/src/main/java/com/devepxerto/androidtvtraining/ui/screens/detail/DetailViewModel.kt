@@ -1,4 +1,4 @@
-package com.devepxerto.androidtvtraining.ui.detail
+package com.devepxerto.androidtvtraining.ui.screens.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

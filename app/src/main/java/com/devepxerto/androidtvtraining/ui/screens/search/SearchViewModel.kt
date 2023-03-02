@@ -1,4 +1,4 @@
-package com.devepxerto.androidtvtraining.ui.search
+package com.devepxerto.androidtvtraining.ui.screens.search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.MainActivity">
+    tools:context=".ui.screens.main.MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/search_fragment"
-        android:name="com.devepxerto.androidtvtraining.ui.search.SearchFragment"
+        android:name="com.devepxerto.androidtvtraining.ui.screens.search.SearchFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

@@ -1,4 +1,4 @@
-package com.devepxerto.androidtvtraining.ui.main
+package com.devepxerto.androidtvtraining.ui.screens.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -15,8 +15,8 @@ import com.devepxerto.androidtvtraining.data.MoviesRepository
 import com.devepxerto.androidtvtraining.data.remote.RemoteConnection
 import com.devepxerto.androidtvtraining.domain.Category
 import com.devepxerto.androidtvtraining.domain.Movie
-import com.devepxerto.androidtvtraining.ui.common.MovieRowScreen
-import com.devepxerto.androidtvtraining.ui.search.SearchActivity
+import com.devepxerto.androidtvtraining.ui.screens.common.MovieRowScreen
+import com.devepxerto.androidtvtraining.ui.screens.search.SearchActivity
 import kotlinx.coroutines.launch
 
 class MainFragment : BrowseSupportFragment(), MovieRowScreen {

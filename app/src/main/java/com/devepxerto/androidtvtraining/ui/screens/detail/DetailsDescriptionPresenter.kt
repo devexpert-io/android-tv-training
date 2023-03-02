@@ -1,4 +1,4 @@
-package com.devepxerto.androidtvtraining.ui.detail
+package com.devepxerto.androidtvtraining.ui.screens.detail
 
 import android.app.Activity
 import android.widget.Toast

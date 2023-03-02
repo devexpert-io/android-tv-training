@@ -1,4 +1,4 @@
-package com.devepxerto.androidtvtraining.ui.search
+package com.devepxerto.androidtvtraining.ui.screens.search
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels
@@ -12,8 +12,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.devepxerto.androidtvtraining.R
 import com.devepxerto.androidtvtraining.data.MoviesRepository
 import com.devepxerto.androidtvtraining.data.remote.RemoteConnection
-import com.devepxerto.androidtvtraining.ui.common.MovieRowScreen
-import com.devepxerto.androidtvtraining.ui.main.BackgroundState
+import com.devepxerto.androidtvtraining.ui.screens.common.MovieRowScreen
+import com.devepxerto.androidtvtraining.ui.screens.main.BackgroundState
 import kotlinx.coroutines.launch
 
 class SearchFragment : SearchSupportFragment(),

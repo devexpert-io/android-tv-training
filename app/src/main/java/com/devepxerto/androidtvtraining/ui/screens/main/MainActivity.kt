@@ -1,12 +1,12 @@
-package com.devepxerto.androidtvtraining.ui.search
+package com.devepxerto.androidtvtraining.ui.screens.main
 
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import com.devepxerto.androidtvtraining.R
 
-class SearchActivity : FragmentActivity() {
+class MainActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search)
+        setContentView(R.layout.activity_main)
     }
 }

@@ -1,4 +1,4 @@
-package com.devepxerto.androidtvtraining.ui.main
+package com.devepxerto.androidtvtraining.ui.screens.main
 
 import android.view.ViewGroup
 import androidx.leanback.widget.ImageCardView
