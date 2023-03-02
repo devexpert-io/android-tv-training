@@ -3,7 +3,6 @@ package com.devepxerto.androidtvtraining.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.viewModels
 import androidx.leanback.app.BrowseSupportFragment
 import androidx.leanback.widget.*
@@ -16,6 +15,7 @@ import com.devepxerto.androidtvtraining.data.remote.RemoteConnection
 import com.devepxerto.androidtvtraining.domain.Category
 import com.devepxerto.androidtvtraining.domain.Movie
 import com.devepxerto.androidtvtraining.ui.detail.DetailActivity
+import com.devepxerto.androidtvtraining.ui.search.SearchActivity
 import kotlinx.coroutines.launch
 
 class MainFragment : BrowseSupportFragment() {
@@ -39,18 +39,19 @@ class MainFragment : BrowseSupportFragment() {
         rowsAdapter = ArrayObjectAdapter(ListRowPresenter())
         adapter = rowsAdapter
 
+        searchAffordanceColor = resources.getColor(R.color.accent, null)
+
+        setOnSearchClickedListener {
+            startActivity(Intent(requireContext(), SearchActivity::class.java))
+        }
+
         onItemViewClickedListener =
             OnItemViewClickedListener { vh, movie, _, _ ->
-                val bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                    requireActivity(),
-                    (vh.view as ImageCardView).mainImageView,
-                    DetailActivity.HERO_EXTRA
-                ).toBundle()
-
-                val intent = Intent(requireContext(), DetailActivity::class.java).apply {
-                    putExtra(DetailActivity.MOVIE_EXTRA, movie as Movie)
-                }
-                startActivity(intent, bundle)
+                DetailActivity.navigate(
+                    requireContext(),
+                    movie as Movie,
+                    (vh.view as ImageCardView).mainImageView
+                )
             }
 
         onItemViewSelectedListener = OnItemViewSelectedListener { _, movie, _, _ ->

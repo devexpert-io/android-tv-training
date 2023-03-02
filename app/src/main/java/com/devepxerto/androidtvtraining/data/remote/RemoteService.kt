@@ -12,4 +12,10 @@ interface RemoteService {
         @Query("vote_count.gte") voteCount: Int = 100
     ): RemoteResult
 
+    @GET("search/movie")
+    suspend fun searchMovies(
+        @Query("api_key") apiKey: String,
+        @Query("query") query: String
+    ): RemoteResult
+
 }

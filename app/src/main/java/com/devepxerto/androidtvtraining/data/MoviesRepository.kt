@@ -16,4 +16,8 @@ class MoviesRepository(
         }
     }
 
+    suspend fun search(query: String): List<Movie> {
+        return remoteService.searchMovies(apiKey, query).results.map { it.toDomain() }
+    }
+
 }
