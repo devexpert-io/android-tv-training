@@ -34,6 +34,9 @@
         <activity
             android:name="com.devepxerto.androidtvtraining.ui.screens.search.SearchActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.screens.grid.CategoryActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

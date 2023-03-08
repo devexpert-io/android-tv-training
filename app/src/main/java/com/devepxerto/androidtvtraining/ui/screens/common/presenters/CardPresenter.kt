@@ -1,29 +1,30 @@
-package com.devepxerto.androidtvtraining.ui.screens.main
+package com.devepxerto.androidtvtraining.ui.screens.common.presenters
 
 import android.view.ViewGroup
 import androidx.leanback.widget.ImageCardView
 import androidx.leanback.widget.Presenter
-import com.devepxerto.androidtvtraining.common.loadDrawable
-import com.devepxerto.androidtvtraining.domain.Category
+import com.devepxerto.androidtvtraining.common.loadUrl
+import com.devepxerto.androidtvtraining.domain.Movie
 
-class CategoryPresenter : Presenter() {
+class CardPresenter : Presenter() {
 
     override fun onCreateViewHolder(parent: ViewGroup): ViewHolder {
 
         val cardView = ImageCardView(parent.context).apply {
             isFocusable = true
             isFocusableInTouchMode = true
-            setMainImageDimensions(176, 176)
+            setMainImageDimensions(176, 313)
         }
 
         return ViewHolder(cardView)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, item: Any) {
-        val movie = item as Category
+        val movie = item as Movie
         with(viewHolder.view as ImageCardView) {
-            titleText = movie.name
-            mainImageView.loadDrawable(movie.icon)
+            titleText = movie.title
+            contentText = movie.releaseDate
+            mainImageView.loadUrl(movie.poster)
         }
 
     }

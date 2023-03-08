@@ -18,6 +18,7 @@ import com.devepxerto.androidtvtraining.data.remote.RemoteConnection
 import com.devepxerto.androidtvtraining.domain.Category
 import com.devepxerto.androidtvtraining.domain.Movie
 import com.devepxerto.androidtvtraining.ui.screens.common.MovieRowScreen
+import com.devepxerto.androidtvtraining.ui.screens.common.presenters.CategoryPresenter
 import com.devepxerto.androidtvtraining.ui.screens.search.SearchActivity
 import kotlinx.coroutines.launch
 

@@ -12,9 +12,12 @@ class MoviesRepository(
 
     suspend fun getCategories(): Map<Category, List<Movie>> {
         return Category.values().associateWith { category ->
-            remoteService.listPopularMovies(apiKey, category.id).results.map { it.toDomain() }
+            getCategory(category)
         }
     }
+
+    suspend fun getCategory(category: Category): List<Movie> =
+        remoteService.listPopularMovies(apiKey, category.id).results.map { it.toDomain() }
 
     suspend fun search(query: String): List<Movie> {
         return remoteService.searchMovies(apiKey, query).results.map { it.toDomain() }

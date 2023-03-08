@@ -11,6 +11,7 @@ import androidx.leanback.widget.DetailsOverviewRow
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import java.io.Serializable
 
 fun ImageView.loadUrl(url: String) {
     Glide.with(this).load(url).into(this)
@@ -23,6 +24,11 @@ fun ImageView.loadDrawable(@DrawableRes drawableRes: Int) {
 inline fun <reified T : Parcelable> Intent.parcelable(key: String): T? = when {
     SDK_INT >= 33 -> getParcelableExtra(key, T::class.java)
     else -> @Suppress("DEPRECATION") getParcelableExtra(key) as? T
+}
+
+inline fun <reified T : Serializable> Intent.serializable(key: String): T? = when {
+    SDK_INT >= 33 -> getSerializableExtra(key, T::class.java)
+    else -> @Suppress("DEPRECATION") getSerializableExtra(key) as? T
 }
 
 fun DetailsOverviewRow.loadImageUrl(context: Context, url: String) {
