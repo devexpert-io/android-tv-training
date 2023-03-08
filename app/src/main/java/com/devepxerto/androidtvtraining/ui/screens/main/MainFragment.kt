@@ -6,6 +6,8 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.leanback.app.BrowseSupportFragment
 import androidx.leanback.widget.ArrayObjectAdapter
+import androidx.leanback.widget.HeaderItem
+import androidx.leanback.widget.ListRow
 import androidx.leanback.widget.ListRowPresenter
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -69,5 +71,12 @@ class MainFragment : BrowseSupportFragment(), MovieRowScreen {
             buildListRow(category.ordinal, category.name, movies)
         }
         submitRows(*rows.toTypedArray())
+        addCategoriesRow()
+    }
+
+    private fun addCategoriesRow() {
+        val adapter = ArrayObjectAdapter(CategoryPresenter())
+        adapter.addAll(0, Category.values().toList())
+        rowsAdapter.add(ListRow(HeaderItem(getString(R.string.categories)), adapter))
     }
 }

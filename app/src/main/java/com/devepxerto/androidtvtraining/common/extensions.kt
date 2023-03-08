@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable
 import android.os.Build.VERSION.SDK_INT
 import android.os.Parcelable
 import android.widget.ImageView
+import androidx.annotation.DrawableRes
 import androidx.leanback.widget.DetailsOverviewRow
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
@@ -13,6 +14,10 @@ import com.bumptech.glide.request.transition.Transition
 
 fun ImageView.loadUrl(url: String) {
     Glide.with(this).load(url).into(this)
+}
+
+fun ImageView.loadDrawable(@DrawableRes drawableRes: Int) {
+    Glide.with(this).load(drawableRes).into(this)
 }
 
 inline fun <reified T : Parcelable> Intent.parcelable(key: String): T? = when {
