@@ -17,10 +17,18 @@ class CategoryViewModel(private val category: Category, private val repository: 
     private val _state = MutableStateFlow(UiState(loading = false, movies = emptyList()))
     val state = _state.asStateFlow()
 
-    fun onUiReady() {
+    private var currentPage = 1
+
+    fun nextPage() {
         viewModelScope.launch {
             _state.update { it.copy(loading = true) }
-            _state.update { it.copy(loading = false, movies = repository.getCategory(category)) }
+            _state.update {
+                it.copy(
+                    loading = false,
+                    movies = it.movies + repository.getCategory(category, currentPage)
+                )
+            }
+            currentPage++
         }
     }
 

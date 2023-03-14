@@ -16,8 +16,8 @@ class MoviesRepository(
         }
     }
 
-    suspend fun getCategory(category: Category): List<Movie> =
-        remoteService.listPopularMovies(apiKey, category.id).results.map { it.toDomain() }
+    suspend fun getCategory(category: Category, page: Int = 1): List<Movie> =
+        remoteService.listPopularMovies(apiKey, category.id, page = page).results.map { it.toDomain() }
 
     suspend fun search(query: String): List<Movie> {
         return remoteService.searchMovies(apiKey, query).results.map { it.toDomain() }

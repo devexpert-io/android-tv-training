@@ -14,9 +14,10 @@ import com.devepxerto.androidtvtraining.common.serializable
 import com.devepxerto.androidtvtraining.data.MoviesRepository
 import com.devepxerto.androidtvtraining.data.remote.RemoteConnection
 import com.devepxerto.androidtvtraining.domain.Category
+import com.devepxerto.androidtvtraining.domain.Movie
 import com.devepxerto.androidtvtraining.ui.screens.common.MovieCollectionScreen
-import com.devepxerto.androidtvtraining.ui.screens.main.BackgroundState
 import com.devepxerto.androidtvtraining.ui.screens.common.presenters.CardPresenter
+import com.devepxerto.androidtvtraining.ui.screens.main.BackgroundState
 import kotlinx.coroutines.launch
 
 class CategoryFragment : VerticalGridSupportFragment(), MovieCollectionScreen {
@@ -46,7 +47,17 @@ class CategoryFragment : VerticalGridSupportFragment(), MovieCollectionScreen {
         title = category.name
 
         onItemViewClickedListener = requireContext().itemViewClickListener()
-        setOnItemViewSelectedListener(requireContext().itemViewSelectedListener())
+        setOnItemViewSelectedListener { _, movie, _, _ ->
+            (movie as? Movie)?.let {
+                backgroundState.loadUrl(movie.backdrop)
+                val index = gridAdapter.indexOf(movie)
+                val count = vm.state.value.movies.size
+                if (index >= count - gridPresenter.numberOfColumns) {
+                    vm.nextPage()
+                }
+            }
+
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,12 +67,13 @@ class CategoryFragment : VerticalGridSupportFragment(), MovieCollectionScreen {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
                 vm.state.collect { state ->
                     if (state.loading) progressBarManager.show() else progressBarManager.hide()
-                    gridAdapter.clear()
-                    gridAdapter.addAll(0, state.movies)
+                    state.movies.forEach {
+                        if (gridAdapter.indexOf(it) < 0) gridAdapter.add(it)
+                    }
                 }
             }
         }
 
-        vm.onUiReady()
+        vm.nextPage()
     }
 }
